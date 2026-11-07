@@ -24,7 +24,7 @@ def main() -> None:
         root = Path(tmp)
         (root / "notes").mkdir()
         (root / "notes" / "hello.txt").write_text("Welcome to the notes viewer.\n", encoding="utf-8")
-        (root / "secret.txt").write_text("API_KEY=do-not-share\n", encoding="utf-8")
+        (root / "secret.txt").write_text("PLACEHOLDER_SECRET=redacted\n", encoding="utf-8")
         names = [
             "hello.txt",
             "../secret.txt",
@@ -34,7 +34,7 @@ def main() -> None:
         for name in names:
             try:
                 print(f"{name!r}: {read_note(root / 'notes', name).strip()}")
-            except (ValueError, FileNotFoundError) as error:
+            except (ValueError, FileNotFoundError, PermissionError) as error:
                 print(f"{name!r}: error - {error}")
 
 
